@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class AboutPage extends StatelessWidget {
+class AboutPage extends StatefulWidget {
   const AboutPage({super.key});
+
+  @override
+  State<AboutPage> createState() => _AboutPageState();
+}
+
+class _AboutPageState extends State<AboutPage> {
+  _launchURL() async {
+    final Uri url = Uri.parse("https://github.com/Lameckwh");
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch the url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +46,7 @@ class AboutPage extends StatelessWidget {
                   "MUST FAM Songs App",
                   style: TextStyle(fontWeight: FontWeight.w700),
                 ),
-                Text("v3.234"),
+                Text("v3.13.2"),
               ],
             ),
             const SizedBox(
@@ -47,24 +60,10 @@ class AboutPage extends StatelessWidget {
                   child: ListBody(
                     children: [
                       ListTile(
-                        // trailing: const Icon(Icons.arrow_forward_ios),
-                        leading: const Icon(FontAwesomeIcons.github),
-                        title: const Text("View source code"),
-                        onTap: () async {
-                          // String email =
-                          //     Uri.encodeComponent("bit-032-19@must.ac.mw");
-                          // String subject =
-                          //     Uri.encodeComponent("MaterniTech FeedBack ");
-                          // String body = Uri.encodeComponent("Hi, I am .....");
-                          // Uri mail = Uri.parse(
-                          //     "mailto:$email?subject=$subject&body=$body");
-                          // if (await launchUrl(mail)) {
-                          //   // Email app opened
-                          // } else {
-                          //   // Email app is not opened
-                          // }
-                        },
-                      ),
+                          // trailing: const Icon(Icons.arrow_forward_ios),
+                          leading: const Icon(FontAwesomeIcons.github),
+                          title: const Text("View source code"),
+                          onTap: _launchURL),
                       const Divider(
                         // Add a divider (bottom border)
                         color: Colors.grey,
@@ -76,18 +75,18 @@ class AboutPage extends StatelessWidget {
                         leading: const Icon(Icons.help),
                         title: const Text("Help or FeedBack"),
                         onTap: () async {
-                          // String email =
-                          //     Uri.encodeComponent("bit-032-19@must.ac.mw");
-                          // String subject =
-                          //     Uri.encodeComponent("MaterniTech FeedBack ");
-                          // String body = Uri.encodeComponent("Hi, I am .....");
-                          // Uri mail = Uri.parse(
-                          //     "mailto:$email?subject=$subject&body=$body");
-                          // if (await launchUrl(mail)) {
-                          //   // Email app opened
-                          // } else {
-                          //   // Email app is not opened
-                          // }
+                          String email =
+                              Uri.encodeComponent("bit-032-19@must.ac.mw");
+                          String subject = Uri.encodeComponent(
+                              "MUST FAM Songs App FeedBack ");
+                          String body = Uri.encodeComponent("Hi, I am .....");
+                          Uri mail = Uri.parse(
+                              "mailto:$email?subject=$subject&body=$body");
+                          if (await launchUrl(mail)) {
+                            // Email app opened
+                          } else {
+                            // Email app is not opened
+                          }
                         },
                       ),
                       const Divider(

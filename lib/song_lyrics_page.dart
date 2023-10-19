@@ -97,7 +97,7 @@ class _LyricsPageState extends State<LyricsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+              padding: const EdgeInsets.all(16.0),
               child: Text(
                 widget.song.title,
                 style: const TextStyle(
