@@ -38,6 +38,7 @@ dependencies:
   hive:
   hive_flutter:
   url_launcher:
+  flutter_screenutil:
 
 dev_dependencies:
   flutter_test:

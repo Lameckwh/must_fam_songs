@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:must_fam_songs/song.dart';
 import 'package:must_fam_songs/song_lyrics_page.dart';
 
@@ -6,6 +7,7 @@ class SongListPage extends StatefulWidget {
   const SongListPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SongListPageState createState() => _SongListPageState();
 }
 
@@ -27,65 +29,69 @@ class _SongListPageState extends State<SongListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 1,
-        title: const Text('MUST FAM SONGS'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () async {
-              final String? result = await showSearch(
-                context: context,
-                delegate: SongSearchDelegate(),
-              );
-              filterSongs(result ??
-                  'No Songs Founds'); // Provide a default empty string if 'result' is null
-            },
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize:
-              const Size.fromHeight(2.0), // Set the height of the bottom border
-          child: Container(
-            color: Colors.grey, // Set the border color
-          ),
-        ),
-      ),
-      body: ListView.builder(
-        itemCount: filteredSongs.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              ListTile(
-                title: Text(
-                  filteredSongs[index].title,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w500),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          LyricsPage(song: filteredSongs[index]),
-                    ),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            elevation: 1,
+            title: const Text('MUST FAM SONGS'),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () async {
+                  final String? result = await showSearch(
+                    context: context,
+                    delegate: SongSearchDelegate(),
                   );
+                  filterSongs(result ?? 'No Songs Found');
                 },
               ),
-              const Divider(
-                // Add a divider (bottom border)
-                color: Colors.grey,
-                height: 1,
-                thickness: 0.6,
-                indent: 7,
-                endIndent: 7,
-              ),
             ],
-          );
-        },
-      ),
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(2.h),
+              child: Container(
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          body: ListView.builder(
+            itemCount: filteredSongs.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  ListTile(
+                    title: Text(
+                      overflow: TextOverflow
+                          .ellipsis, // Display ellipsis (...) at the end
+                      maxLines: 1,
+                      filteredSongs[index].title,
+                      style: TextStyle(
+                          fontSize: 18.sp, fontWeight: FontWeight.w500),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              LyricsPage(song: filteredSongs[index]),
+                        ),
+                      );
+                    },
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: 1.h,
+                    thickness: 0.6,
+                    indent: 7.w,
+                    endIndent: 7.w,
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
@@ -94,16 +100,12 @@ class SongSearchDelegate extends SearchDelegate<String> {
   @override
   String get searchFieldLabel => 'Search by Title';
 
-  TextStyle customTextStyle = const TextStyle(
-    fontFamily: 'Ubuntu', // Set the font family to 'Ubuntu'
-    fontSize: 18.0, // Customize the font size
-    fontWeight: FontWeight.normal, // Customize the font weight
-    // Add other text style properties as needed
+  TextStyle customTextStyle = TextStyle(
+    fontFamily: 'Ubuntu',
+    fontSize: 18.sp,
+    fontWeight: FontWeight.normal,
   );
 
-// Set the placeholder text
-
-  @override
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -123,8 +125,6 @@ class SongSearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    // This method is called when the user selects a search result.
-    // You can return the selected item here if needed.
     return Center(
       child: Text(
         'Selected: $query',
@@ -135,8 +135,6 @@ class SongSearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // This method is called as the user types in the search field.
-    // You can provide suggestions based on the user's input.
     final suggestionList = songs
         .where((song) => song.title.toLowerCase().contains(query.toLowerCase()))
         .toList();
@@ -148,6 +146,9 @@ class SongSearchDelegate extends SearchDelegate<String> {
           children: [
             ListTile(
               title: Text(
+                overflow:
+                    TextOverflow.ellipsis, // Display ellipsis (...) at the end
+                maxLines: 1,
                 suggestionList[index].title,
                 style: customTextStyle,
               ),
@@ -155,13 +156,12 @@ class SongSearchDelegate extends SearchDelegate<String> {
                 close(context, suggestionList[index].title);
               },
             ),
-            const Divider(
-              // Add a divider (bottom border)
+            Divider(
               color: Colors.grey,
-              height: 1,
+              height: 1.h,
               thickness: 0.6,
-              indent: 7,
-              endIndent: 7,
+              indent: 7.w,
+              endIndent: 7.w,
             ),
           ],
         );

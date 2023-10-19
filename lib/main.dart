@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:must_fam_songs/home_page.dart';
 import 'package:must_fam_songs/model/boxes.dart';
@@ -22,22 +23,28 @@ class MyApp extends StatelessWidget {
         valueListenable: Hive.box('settings').listenable(),
         builder: (context, box, child) {
           final isDark = box.get("isDark", defaultValue: false);
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'MUST FAM SONGS',
-            theme: isDark
-                ? ThemeData(
-                    brightness: Brightness.dark,
-                    useMaterial3: true,
-                    fontFamily: 'Ubuntu',
-                  )
-                : ThemeData(
-                    colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
-                    brightness: Brightness.light,
-                    useMaterial3: true,
-                    fontFamily: 'Ubuntu',
-                  ),
-            home: const WelcomePage(title: 'MUST FAM SONGS'),
+          return ScreenUtilInit(
+            designSize: const Size(360, 690),
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'MUST FAM SONGS',
+              theme: isDark
+                  ? ThemeData(
+                      brightness: Brightness.dark,
+                      useMaterial3: true,
+                      fontFamily: 'Ubuntu',
+                      colorSchemeSeed: Colors.green[700],
+                    )
+                  : ThemeData(
+                      colorScheme:
+                          ColorScheme.fromSeed(seedColor: Colors.orange),
+                      brightness: Brightness.light,
+                      useMaterial3: true,
+                      fontFamily: 'Ubuntu',
+                      // colorSchemeSeed: Colors.green[700],
+                    ),
+              home: const WelcomePage(title: 'MUST FAM SONGS'),
+            ),
           );
         });
   }
@@ -55,62 +62,72 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.green[700],
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'images/music_note.png', width: 150, // Set the width of the image
-              height: 250,
-            ),
-            // Make sure to place your image in the 'assets' folder
-            const SizedBox(height: 70),
-            const Text(
-              'MUST FAM',
-              style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange,
-                  fontFamily: 'Ubuntu'),
-            ),
-            const Text(
-              'SONGS',
-              style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange,
-                  fontFamily: 'Ubuntu'),
-            ),
-            const SizedBox(height: 80),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
-                minimumSize: const Size(200, 50), // Set button width and height
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5), // Set border radius
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Scaffold(
+          backgroundColor: Colors.green[700],
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'images/music_note.png',
+                  width: 110.w, // Using ScreenUtil for responsive width
+                  height: 210.h, // Using ScreenUtil for responsive height
                 ),
-                // Set the background color to orange
-              ),
-              child: const Text(
-                'Get Started',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Ubuntu"),
-              ),
+                SizedBox(
+                    height: 30.h), // Using ScreenUtil for responsive height
+                Text(
+                  'MUST FAM',
+                  style: TextStyle(
+                      fontSize:
+                          32.sp, // Using ScreenUtil for responsive font size
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange,
+                      fontFamily: 'Ubuntu'),
+                ),
+                Text(
+                  'SONGS',
+                  style: TextStyle(
+                      fontSize:
+                          32.sp, // Using ScreenUtil for responsive font size
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange,
+                      fontFamily: 'Ubuntu'),
+                ),
+                SizedBox(
+                    height: 35.h), // Using ScreenUtil for responsive height
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    minimumSize: Size(
+                        200.w, 50.h), // Using ScreenUtil for responsive size
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(5), // Set border radius
+                    ),
+                  ),
+                  child: Text(
+                    'Get Started',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize:
+                            20.sp, // Using ScreenUtil for responsive font size
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Ubuntu"),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

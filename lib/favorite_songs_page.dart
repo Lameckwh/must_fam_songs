@@ -15,66 +15,68 @@ class FavoritesPage extends StatelessWidget {
           elevation: 1,
           title: const Text('Favorite Songs'),
           actions: [
-            IconButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text(
-                        'Confirm Deletion',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      content: const Text(
-                        'Are you sure you want to delete all favorite songs?',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      actions: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pop(); // Close the confirmation dialog
-                              },
-                              child: const Text(
-                                'Cancel',
-                                style: TextStyle(fontSize: 16),
-                              ),
+            boxFavoriteSongs.isEmpty
+                ? const Text("")
+                : IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text(
+                              'Confirm Deletion',
+                              style: TextStyle(fontSize: 16),
                             ),
-                            const SizedBox(
-                              width: 10,
+                            content: const Text(
+                              'Are you sure you want to delete all favorite songs?',
+                              style: TextStyle(fontSize: 16),
                             ),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(Colors
-                                        .red), // Set background color to red
+                            actions: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pop(); // Close the confirmation dialog
+                                    },
+                                    child: const Text(
+                                      'Cancel',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  ElevatedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty
+                                          .all<Color>(Colors
+                                              .red), // Set background color to red
+                                    ),
+                                    onPressed: () {
+                                      // Delete the favorite tip when confirmed
+                                      boxFavoriteSongs.clear();
+                                      Navigator.of(context)
+                                          .pop(); // Close the confirmation dialog
+                                    },
+                                    child: const Text(
+                                      'Delete all',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              onPressed: () {
-                                // Delete the favorite tip when confirmed
-                                boxFavoriteSongs.clear();
-                                Navigator.of(context)
-                                    .pop(); // Close the confirmation dialog
-                              },
-                              child: const Text(
-                                'Delete all',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              icon: const Icon(
-                Icons.delete,
-                color: Colors.red,
-              ),
-            )
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  )
           ],
         ),
         body: ValueListenableBuilder<Box>(
@@ -104,6 +106,9 @@ class FavoritesPage extends StatelessWidget {
                           padding: const EdgeInsets.all(0), // Adjust padding
                           child: ListTile(
                             title: Text(
+                              overflow: TextOverflow
+                                  .ellipsis, // Display ellipsis (...) at the end
+                              maxLines: 1,
                               favoriteSongs.title,
                               style: const TextStyle(
                                   fontSize: 16), // Set font size
