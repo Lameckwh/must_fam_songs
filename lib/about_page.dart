@@ -66,15 +66,6 @@ class _AboutPageState extends State<AboutPage> {
                 Padding(
                   padding: EdgeInsets.all(8.w),
                   child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Optional: Defines the border radius
-                      side: const BorderSide(
-                        color:
-                            Colors.grey, // Optional: Defines the border color
-                        width: 1.0, // Optional: Defines the border width
-                      ),
-                    ),
                     child: Padding(
                       padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                       child: ListBody(
@@ -157,7 +148,7 @@ class _AboutPageState extends State<AboutPage> {
                   padding:
                       EdgeInsets.only(left: 30.w, right: 30.w, bottom: 30.h),
                   child: Text(
-                    "This app was developed by Lameck Mbewe, the former chair of MUST Future Adventist Men and Software Developer",
+                    "This app was developed by Lameck Mbewe, the former chair of MUST Future Adventist Men",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16.sp),
                   ),

@@ -204,7 +204,6 @@ Tipalasire kudoko
 2. Zonse zakwathu ndizabwino ndi maluwa onyezimira
 Komweko tidzayimba nyimbo zoyamikira Mpulumutsi
 
-
 3. Kwathu kumwamba ndikwabwino ndilakalaka kufikako
 Zanga ndasiyatu za mdziko ndikafikeko kumwambako
 
