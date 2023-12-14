@@ -13,7 +13,7 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   _launchURL() async {
-    final Uri url = Uri.parse("https://github.com/Lameckwh");
+    final Uri url = Uri.parse("https://github.com/Lameckwh/must_fam_songs");
     if (!await launchUrl(url)) {
       throw Exception('Could not launch the url');
     }
@@ -101,8 +101,7 @@ class _AboutPageState extends State<AboutPage> {
                                   Uri.encodeComponent("bit-032-19@must.ac.mw");
                               String subject = Uri.encodeComponent(
                                   "MUST FAM Songs App FeedBack ");
-                              String body =
-                                  Uri.encodeComponent("Hi, I am .....");
+                              String body = Uri.encodeComponent("Hi, I am ");
                               Uri mail = Uri.parse(
                                   "mailto:$email?subject=$subject&body=$body");
                               if (await launchUrl(mail)) {

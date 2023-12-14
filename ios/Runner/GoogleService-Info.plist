@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAth6JjNXpEUd3LewhNcr7X-5cPy4_h98w</string>
+	<key>GCM_SENDER_ID</key>
+	<string>833900108489</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.mustFamSongs</string>
+	<key>PROJECT_ID</key>
+	<string>must-fam-songs</string>
+	<key>STORAGE_BUCKET</key>
+	<string>must-fam-songs.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:833900108489:ios:76092a1eecf4a6d83a8b18</string>
+	<key>DATABASE_URL</key>
+	<string>https://must-fam-songs-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:must_fam_songs/song.dart';
-import 'package:must_fam_songs/song_lyrics_page.dart';
+import 'package:must_fam_songs/screens/song_lyrics_page.dart';
 
 class SongListPage extends StatefulWidget {
   const SongListPage({super.key});
@@ -55,40 +55,45 @@ class _SongListPageState extends State<SongListPage> {
               ),
             ),
           ),
-          body: ListView.builder(
-            itemCount: filteredSongs.length,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  ListTile(
-                    title: Text(
-                      overflow: TextOverflow
-                          .ellipsis, // Display ellipsis (...) at the end
-                      maxLines: 1,
-                      filteredSongs[index].title,
-                      style: TextStyle(
-                          fontSize: 18.sp, fontWeight: FontWeight.w500),
+          body: Scrollbar(
+            child: ListView.builder(
+              itemCount: filteredSongs.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    ListTile(
+                      title: Text(
+                        overflow: TextOverflow
+                            .ellipsis, // Display ellipsis (...) at the end
+                        maxLines: 1,
+                        filteredSongs[index].title,
+                        style: TextStyle(
+                            fontSize: 18.sp, fontWeight: FontWeight.w500),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LyricsPage(
+                              songs: filteredSongs,
+                              song: filteredSongs[index],
+                              currentIndex: index,
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              LyricsPage(song: filteredSongs[index]),
-                        ),
-                      );
-                    },
-                  ),
-                  Divider(
-                    color: Colors.grey,
-                    height: 1.h,
-                    thickness: 0.6,
-                    indent: 7.w,
-                    endIndent: 7.w,
-                  ),
-                ],
-              );
-            },
+                    Divider(
+                      color: Colors.grey,
+                      height: 1.h,
+                      thickness: 0.6,
+                      indent: 7.w,
+                      endIndent: 7.w,
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         );
       },

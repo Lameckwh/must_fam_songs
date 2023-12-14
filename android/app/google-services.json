@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "389052377239",
+    "project_id": "must-fam-admin",
+    "storage_bucket": "must-fam-admin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389052377239:android:7e4d49c2828703694221d2",
+        "android_client_info": {
+          "package_name": "com.example.must_fam_songs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSoM8QTMkmH-VjRbmdUTB4wtUMoexAz5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

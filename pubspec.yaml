@@ -39,6 +39,20 @@ dependencies:
   hive_flutter:
   url_launcher:
   flutter_screenutil:
+  shared_preferences:
+  image_picker:
+  path_provider:
+  path:
+  firebase_core:
+  cloud_firestore:
+  firebase_storage:
+  firebase_database:
+  provider:
+  logger:
+  intl:
+  cached_network_image:
+  flutter_local_notifications:
+  firebase_messaging:
 
 dev_dependencies:
   flutter_test:

@@ -410,8 +410,8 @@ Ndikonda dzinalo labwino, Dzina lanu, Yesu.
 Ambuye akuatatani, Bvomerani nonse.
           """),
   Song(
-    "20 - Ambuye wathu pamtanda",
-    """1. Ambuye wathu pamtanda 
+    "20 - Ambuye Wathu Pamtanda",
+    """1. Ambuye Wathu Pamtanda 
 Anafa opanda tchimo
 Kufuna kupulumutsa moyo wathu 
 Tamkana wamachiritso 
