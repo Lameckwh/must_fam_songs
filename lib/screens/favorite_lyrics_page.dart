@@ -40,7 +40,6 @@ class FavoriteLyricsPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 21,
                   height: 1.5,
-                  // fontWeight: FontWeight.w500,
                 ),
               ),
             ),
