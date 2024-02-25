@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:must_fam_songs/screens/favorite_songs_page.dart';
 import 'package:must_fam_songs/model/boxes.dart';
 import 'package:must_fam_songs/model/favorite_songs.dart';
@@ -87,7 +88,13 @@ class _LyricsPageState extends State<LyricsPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        title: const Text("MUST FAM SONGS"),
+        title: Text(
+          "MUST FAM",
+          style: TextStyle(
+            fontSize: 19.51.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           ButtonBar(
             alignment: MainAxisAlignment.center,
@@ -123,9 +130,9 @@ class _LyricsPageState extends State<LyricsPage> {
                     child: SelectableText(
                       widget.songs[index].title,
                       style: const TextStyle(
-                        fontSize: 22,
-                        height: 1.4,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 24,
+                        height: 1.3,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -135,8 +142,9 @@ class _LyricsPageState extends State<LyricsPage> {
                     child: SelectableText(
                       widget.songs[index].lyrics,
                       style: const TextStyle(
-                        fontSize: 19,
+                        fontSize: 21,
                         height: 1.5,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

@@ -50,7 +50,7 @@ On us Thy holy Spirit pour.
 """,
   ),
   Song(
-    '3 - Kodi Mwaladira Yesu',
+    '3 - Kodi Mwalandira Yesu',
     """ 1. Unison: Kodi mwalandira Yesu Mbuyeyo?
 All: Kodi mwasamba m’mwazi wake?
 Mwakhulupilira mwa chisomo ‘ce?
@@ -157,6 +157,29 @@ All: Adza kondwa, Ena adzakondwa.
           """,
   ),
   Song(
+    '8 - Kholora',
+    """1. Chaka chino chakholora
+Dzinthu dzonse dzachaditu
+Mbuye afuna antchito
+Adalirafe akhristu.
+
+CHORUS:
+Sap: N’khristu thamanga, ndi uthenga
+All: Thamanga ndi uthenga, Mzimu woyera atsogoze
+Tifikire ponse ponsepo, dzuka n’khristu, khlora m’yoyo.
+
+2. N’khristu lalika ndi mphamvu
+Usanjenjemere konse
+Ambuye analonjeza
+Ali nawe nthawi zonse.
+
+3. Dzuka olalikirawe
+Yesu ali kudza M’sangwa
+Konzetsera moyo wako
+Kukomana ndi Ambuye.
+          """,
+  ),
+  Song(
     '9 - Mubveke Mbuyeyo',
     """1. Tamani mphamvu ya Yesu angelo agwadwe;
 Turutsanitu korona, mumbveke Mbuyeyo
@@ -173,7 +196,6 @@ Am’lemekeze mfumuyo mumbveke Mbuyeyo.
 4. Tifuna kuti komweko, tikamgwadire’Ye;
 Tidzayimba kosaleka, mumbveke Mbuyeyo
 Tidzaimba kosaleka mumbveke Mbuyeyo.
-
           """,
   ),
   Song(
@@ -193,20 +215,19 @@ Nkayimbira, nkayimbira, nkatamande kosatha.
   ),
   Song(
     '11 - Kankhani Ngalawa',
-    """1. Kankhani ngalawa timke kwathu  masulani zopalasira
-Ganizani za abwenzi athu omwe tinalekana nawo
+    """1. Kankhani ngalawa tinke kwathu, masulani zopalasira,
+Ganizani za abwenzi athu, omwe tinalekana nawo
 
 Chorus
-Sop: Bakankhaaa.....bakankhaa....kankhaaa...
+Sop: Bakankhaaa..... bakankhaa.... kankhaaa...
 All: Kankhani ngalawa aaa....Kankhani ngalawa aaa...kankhani ngalawa...
 Tipalasire kudoko
 
-2. Zonse zakwathu ndizabwino ndi maluwa onyezimira
-Komweko tidzayimba nyimbo zoyamikira Mpulumutsi
+2. Zonse zakwathu ndizabwino, ndi maluwa onyezimira,
+Komweko tidzayimba nyimbo, zoyamikira Mpulumutsi
 
-3. Kwathu kumwamba ndikwabwino ndilakalaka kufikako
-Zanga ndasiyatu za mdziko ndikafikeko kumwambako
-
+3. Kwathu kumwamba ndikwabwino, ndilakalaka kufikako,
+Zanga ndasiyatu za mdziko, ndikafikeko kumwambako
           """,
   ),
   Song(
@@ -307,7 +328,6 @@ Tenor: away
 All: away away beyond that blue  
 Alto: away 
 All: away away away beyond that blue  
-
 
 way beyond that blue....... 
 Bass: blue blue blue blue blue  
@@ -418,7 +438,7 @@ Tamkana wamachiritso
 Tasochera ndi za mndziko
 Aitana iwe ndine kangaza 
 
-CHORUS
+CHORUS:
 2. Kangaza kangazatu,
 Aterodi Mbuye Yesu kangaza 
 Tamkana wamachiritso wamachiritso 
@@ -439,5 +459,78 @@ Tasochera ndi za mndziko
 Aitana iwe ndine kangaza
           """,
   ),
-  // Add more songs as needed
+  Song(
+    "21 - Chiyembekezo Chodala",
+    """
+1. Chiyembekezo chodalacho, Nkhani yokoma (Nkhani yokoma)
+Abweranso msanga Yesu Mpulumutsi wanga (Mpulumutsiyo),
+Mapeto avuto lonseli ayandikira (Ayandikira)
+Mbuye mtenge mtima wangawu Ndidzanke Nanu.
+
+ CHORUS: 
+ Abwera msanga (Posachedwa)
+Sin'dziwa nthawi (Sanainene)
+N'zamona maso ndi maso muulemelero (Ulemelero) 
+Ali pakhomo (Wayandika), Ndisiye tchimo, 
+N'dzapite naye kukakhala Naye muyaya! 
+
+2. Chiyembekezo chodalacho, Nkhani yokoma (Nkhani yokoma)
+Zonse ponse ponse zinena Wayandikira (Wayandikira) 
+Posachedwatu adza Yesu Kutenga ake (Kutenga Ake) 
+Kunka nawo kudziko la mtendere m'mwambamo. 
+
+3. Chiyembekezo chodalacho, Nkhani yokoma (Nkani yokoma)
+Zamdziko ndazikana zonse Kudikira 'Ye (Kudikira 'ye) 
+Malo owala kumwambako Akonzera 'ne (Akonzera 'ne) 
+Komwe ndikakhala ndi Yesu nthawi zosatha.
+          """,
+  ),
+  Song(
+    "22 - Saulo Undilondalonderanji",
+    """
+1. Saulo pachiyambi anali wosadziwa
+Anapempha kalata yopita ku Damasiko
+
+CHORUS:
+Bass: Sauloo
+All  : Saulo Saulo Saulo
+Bass: Saulosi
+All: undilondalonderanji
+Bass: iwe Saulo
+All: Saulo Saulo Saulo
+Undilondalonderanji
+
+2. Pompo omperekeza anachitatu mantha
+Anaona kuwala kumwamba kunatseguka
+
+3. Ndiponso mwadzidzidzi kunamvekatu mawu
+Ochokera kumwamba undilondalonderanji
+          """,
+  ),
+  Song(
+    "23 - Tili Pa Ulendo",
+    """
+1. Sop: Pita Pita Mose
+All: pita ku Iguputo kauze Pharaoh
+Ndifuna anthu anga
+
+CHORUS:
+Sop : ali pa ulendo x4
+All: wopita 'Kenani x4
+Walamula ndi Yehova
+Walamula ndi Yehova
+
+2. Mose  anapita 
+Kwa mfumu Pharaoh Mbuye wandituma afuna anthu ake
+
+3. Mbale iwe ndine
+Mbuye akufuna kuti tituluke m' Iguputo wa uchimo 
+
+Refrain 
+Sop :tili pa ulendo x4 
+All: wopita kumwamba x4
+Ndi lonjezano la Mbuye 
+Ndi lonjezano la Mbuye
+          """,
+  ),
 ];

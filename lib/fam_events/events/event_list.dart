@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:must_fam_songs/fam_events/events/edit_event.dart';
 import 'package:must_fam_songs/fam_events/events/event_details.dart';
 
 class EventList extends StatefulWidget {
@@ -14,45 +12,6 @@ class EventList extends StatefulWidget {
 }
 
 class _EventListState extends State<EventList> {
-  void _confirmDeleteEvent(
-      BuildContext context, String documentId, String? imageUrl) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Confirm Delete'),
-          content: const Text('Are you sure you want to delete this event?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                _deleteEvent(documentId, imageUrl);
-                Navigator.of(context).pop();
-              },
-              child: const Text('Delete'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _deleteEvent(String documentId, String? imageUrl) async {
-    await FirebaseFirestore.instance
-        .collection('events')
-        .doc(documentId)
-        .delete();
-
-    if (imageUrl != null) {
-      await FirebaseStorage.instance.refFromURL(imageUrl).delete();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -164,45 +123,6 @@ class _EventListState extends State<EventList> {
                                   ),
                                 ],
                               ),
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                IconButton(
-                                  tooltip: 'Delete Event',
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ),
-                                  onPressed: () {
-                                    _confirmDeleteEvent(
-                                        context, event.id, event['imageUrl']);
-                                  },
-                                ),
-                                IconButton(
-                                  tooltip: 'Edit Event',
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    color: Colors.green,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => EditEventForm(
-                                          documentId: event.id,
-                                          title: event['title'],
-                                          description: event['description'],
-                                          dateOfEvent: (event['dateOfEvent']
-                                                  as Timestamp)
-                                              .toDate(),
-                                          imageUrl: event['imageUrl'],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
                             ),
                           ],
                         ),

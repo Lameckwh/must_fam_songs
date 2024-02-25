@@ -12,7 +12,10 @@ class FavoriteLyricsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        title: const Text("MUST FAM SONGS"),
+        title: const Text(
+          "MUST FAM",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -23,8 +26,8 @@ class FavoriteLyricsPage extends StatelessWidget {
               child: Text(
                 favoriteSong.title,
                 style: const TextStyle(
-                  fontSize: 22,
-                  height: 1.5,
+                  fontSize: 24,
+                  height: 1.3,
                   fontWeight: FontWeight.w600,
                   // fontWeight: FontWeight.w500,
                 ),
@@ -35,7 +38,7 @@ class FavoriteLyricsPage extends StatelessWidget {
               child: Text(
                 favoriteSong.lyrics,
                 style: const TextStyle(
-                  fontSize: 19,
+                  fontSize: 21,
                   height: 1.5,
                   // fontWeight: FontWeight.w500,
                 ),

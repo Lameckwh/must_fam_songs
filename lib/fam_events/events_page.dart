@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:must_fam_songs/fam_events/announcements/announcement_form.dart';
 import 'package:must_fam_songs/fam_events/announcements/announcements_list.dart';
 import 'package:must_fam_songs/fam_events/events/event_list.dart';
-import 'package:must_fam_songs/fam_events/events/events_form.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
@@ -33,7 +30,10 @@ class _EventsPageState extends State<EventsPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        title: const Text('FAM Events'),
+        title: const Text(
+          'FAM Events',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: SafeArea(
         child: RefreshIndicator(
@@ -46,33 +46,33 @@ class _EventsPageState extends State<EventsPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   // Section for Announcements
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Events',
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        IconButton(
-                          tooltip: 'Add New Event',
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const EventsForm(),
-                              ),
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.add_circle_outline_outlined,
-                            color: Colors.blue,
-                          ),
-                        ),
+                        // IconButton(
+                        //   tooltip: 'Add New Event',
+                        //   onPressed: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) => const EventsForm(),
+                        //       ),
+                        //     );
+                        //   },
+                        //   icon: const Icon(
+                        //     Icons.add_circle_outline_outlined,
+                        //     color: Colors.blue,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -95,21 +95,21 @@ class _EventsPageState extends State<EventsPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        IconButton(
-                          tooltip: 'Add New Announcement',
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const AnnouncementForm(),
-                              ),
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.add_circle_outline_outlined,
-                            color: Colors.blue,
-                          ),
-                        ),
+                        // IconButton(
+                        //   tooltip: 'Add New Announcement',
+                        //   onPressed: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) => const AnnouncementForm(),
+                        //       ),
+                        //     );
+                        //   },
+                        //   icon: const Icon(
+                        //     Icons.add_circle_outline_outlined,
+                        //     color: Colors.blue,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

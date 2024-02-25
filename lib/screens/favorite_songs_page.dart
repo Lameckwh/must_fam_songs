@@ -14,7 +14,10 @@ class FavoritesPage extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 1,
-          title: const Text('Favorite Songs'),
+          title: const Text(
+            'Favorite Songs',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           actions: [
             boxFavoriteSongs.isEmpty
                 ? const Text("")
@@ -94,7 +97,7 @@ class FavoritesPage extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.favorite,
-                      size: 60,
+                      size: 50,
                       color: Colors.red,
                     ),
                     SizedBox(

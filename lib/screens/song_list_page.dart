@@ -35,7 +35,10 @@ class _SongListPageState extends State<SongListPage> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             elevation: 1,
-            title: const Text('MUST FAM SONGS'),
+            title: const Text(
+              'MUST FAM',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.search),
@@ -47,6 +50,7 @@ class _SongListPageState extends State<SongListPage> {
                   filterSongs(result ?? 'No Songs Found');
                 },
               ),
+              // IconButton(onPressed: () {}, icon: const Icon(Icons.person))
             ],
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(2.h),
@@ -106,7 +110,7 @@ class SongSearchDelegate extends SearchDelegate<String> {
   String get searchFieldLabel => 'Search by Title';
 
   TextStyle customTextStyle = TextStyle(
-    fontFamily: 'Ubuntu',
+    fontFamily: 'ProximaSoft',
     fontSize: 18.sp,
     fontWeight: FontWeight.normal,
   );

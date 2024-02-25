@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:must_fam_songs/fam_events/announcements/announcement_detail.dart';
-import 'package:must_fam_songs/fam_events/announcements/edit_announcement.dart';
 
 class AnnouncementList extends StatefulWidget {
   const AnnouncementList({super.key});
@@ -36,8 +34,11 @@ class _AnnouncementListState extends State<AnnouncementList> {
         final announcements = snapshot.data!.docs;
 
         if (announcements.isEmpty) {
-          return const Center(
-            child: Text('No Announcement Posted Yet'),
+          return Column(
+            children: [
+              SizedBox(height: 20.h),
+              const Text('No Announcement Posted Yet'),
+            ],
           );
         }
 
@@ -77,7 +78,7 @@ class _AnnouncementListState extends State<AnnouncementList> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
-                            width: 240.w,
+                            width: 280.w,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -104,42 +105,6 @@ class _AnnouncementListState extends State<AnnouncementList> {
                         ),
                       ],
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButton(
-                          tooltip: 'Delete Announcement',
-                          icon: const Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          ),
-                          onPressed: () {
-                            _deleteAnnouncement(
-                                context, announcement.id, imageUrl);
-                          },
-                        ),
-                        IconButton(
-                          tooltip: 'Edit Announcement',
-                          icon: const Icon(
-                            Icons.edit,
-                            color: Colors.green,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditAnnouncementForm(
-                                  documentId: announcement.id,
-                                  title: title,
-                                  description: description,
-                                  imageUrl: imageUrl,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -159,45 +124,5 @@ class _AnnouncementListState extends State<AnnouncementList> {
     return description.length > maxLength
         ? '${description.substring(0, maxLength)}...'
         : description;
-  }
-
-  void _deleteAnnouncement(
-      BuildContext context, String documentId, String? imageUrl) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Confirm Delete'),
-          content:
-              const Text('Are you sure you want to delete this announcement?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                _performDeleteAnnouncement(documentId, imageUrl);
-                Navigator.of(context).pop();
-              },
-              child: const Text('Delete'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _performDeleteAnnouncement(String documentId, String? imageUrl) async {
-    await FirebaseFirestore.instance
-        .collection('announcements')
-        .doc(documentId)
-        .delete();
-
-    if (imageUrl != null) {
-      await FirebaseStorage.instance.refFromURL(imageUrl).delete();
-    }
   }
 }

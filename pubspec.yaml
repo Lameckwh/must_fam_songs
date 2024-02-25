@@ -40,7 +40,6 @@ dependencies:
   url_launcher:
   flutter_screenutil:
   shared_preferences:
-  image_picker:
   path_provider:
   path:
   firebase_core:
@@ -51,7 +50,6 @@ dependencies:
   logger:
   intl:
   cached_network_image:
-  flutter_local_notifications:
   firebase_messaging:
 
 dev_dependencies:
@@ -94,11 +92,14 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Ubuntu
+    - family: ProximaSoft
       fonts:
-        - asset: fonts/Ubuntu-Regular.ttf
-        - asset: fonts/Ubuntu-Bold.ttf
-        - asset: fonts/Ubuntu-Italic.ttf
+        - asset: fonts/ProximaSoft-Regular.ttf
+        - asset: fonts/ProximaSoft-Bold.ttf
+        - asset: fonts/ProximaSoft-ExtraBold.ttf
+        - asset: fonts/ProximaSoft-Medium.ttf
+        - asset: fonts/ProximaSoft-Light.ttf
+        - asset: fonts/ProximaSoft-SemiBold.ttf
           style: italic
           weight: 700
   # For details regarding fonts from package dependencies,

@@ -34,7 +34,10 @@ class _AboutPageState extends State<AboutPage> {
           appBar: AppBar(
             elevation: 1,
             automaticallyImplyLeading: false,
-            title: const Text('About'),
+            title: const Text(
+              'About',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -57,7 +60,7 @@ class _AboutPageState extends State<AboutPage> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700, fontSize: 18.sp),
                     ),
-                    Text("v3.13.2", style: TextStyle(fontSize: 16.sp)),
+                    Text("v 1.0.0", style: TextStyle(fontSize: 16.sp)),
                   ],
                 ),
                 SizedBox(
@@ -147,7 +150,7 @@ class _AboutPageState extends State<AboutPage> {
                   padding:
                       EdgeInsets.only(left: 30.w, right: 30.w, bottom: 30.h),
                   child: Text(
-                    "This app was developed by Lameck Mbewe, the former chair of MUST Future Adventist Men",
+                    "This app was developed by Lameck Mbewe, the former chair of MUST Future Adventist Men with love of MUST FAM",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16.sp),
                   ),

@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
                   ? ThemeData(
                       brightness: Brightness.dark,
                       useMaterial3: true,
-                      fontFamily: 'Ubuntu',
+                      fontFamily: 'ProximaSoft',
                       colorSchemeSeed: Colors.green[700],
                     )
                   : ThemeData(
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
                           seedColor: const Color.fromARGB(255, 56, 142, 60)),
                       brightness: Brightness.light,
                       useMaterial3: true,
-                      fontFamily: 'Ubuntu',
+                      fontFamily: 'ProximaSoft',
                     ),
               home: const WelcomePage(title: 'MUST FAM SONGS'),
             ),
@@ -77,14 +77,14 @@ class MyApp extends StatelessWidget {
                   ? ThemeData(
                       brightness: Brightness.dark,
                       useMaterial3: true,
-                      fontFamily: 'Ubuntu',
+                      fontFamily: 'ProximaSoft',
                       colorSchemeSeed: Colors.green[700],
                     )
                   : ThemeData(
                       colorSchemeSeed: Colors.green[700],
                       brightness: Brightness.light,
                       useMaterial3: true,
-                      fontFamily: 'Ubuntu',
+                      fontFamily: 'ProximaSoft',
                     ),
               home: const HomePage(),
             ),
@@ -129,7 +129,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     fontSize: 32.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.orange,
-                    fontFamily: 'Ubuntu',
+                    fontFamily: 'ProximaSoft',
                   ),
                 ),
                 Text(
@@ -138,7 +138,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     fontSize: 32.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.orange,
-                    fontFamily: 'Ubuntu',
+                    fontFamily: 'ProximaSoft',
                   ),
                 ),
                 SizedBox(
@@ -167,7 +167,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       color: Colors.white,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
-                      fontFamily: "Ubuntu",
+                      fontFamily: "ProximaSoft",
                     ),
                   ),
                 ),
