@@ -1,18 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:must_fam_songs/song.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:must_fam_songs/screens/song_lyrics_page.dart';
 
 class SongListPage extends StatefulWidget {
   const SongListPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _SongListPageState createState() => _SongListPageState();
 }
 
 class _SongListPageState extends State<SongListPage> {
   List<Song> filteredSongs = List.from(songs);
+  late ScrollController _scrollController;
+  bool _showGreenLine = true; // Flag to show/hide the green line
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController()
+      ..addListener(() {
+        setState(() {
+          _showGreenLine =
+              _scrollController.offset == 0; // Show line only when at the top
+        });
+      });
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+        .dispose(); // Dispose of the controller when the widget is removed
+    super.dispose();
+  }
 
   void filterSongs(String query) {
     setState(() {
@@ -29,15 +50,39 @@ class _SongListPageState extends State<SongListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return Scaffold(
-          appBar: AppBar(
+    return Scaffold(
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: <Widget>[
+          SliverAppBar(
             automaticallyImplyLeading: false,
-            elevation: 1,
-            title: const Text(
-              'MUST FAM',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(2.h),
+              child: _showGreenLine
+                  ? Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Container(
+                        margin: EdgeInsets.only(left: 10.w),
+                        color: Colors.green,
+                        height: 5.h,
+                        width: 50.w,
+                      ),
+                    )
+                  : const SizedBox.shrink(), // Hide the line when not needed
+            ),
+            surfaceTintColor: Colors.green,
+            pinned: true,
+            expandedHeight: 85.h, // Adjust height as needed
+            flexibleSpace: FlexibleSpaceBar(
+              titlePadding: EdgeInsets.only(left: 10.w, bottom: 10),
+              title: Text(
+                'MUST FAM',
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              centerTitle: false,
             ),
             actions: <Widget>[
               IconButton(
@@ -50,25 +95,40 @@ class _SongListPageState extends State<SongListPage> {
                   filterSongs(result ?? 'No Songs Found');
                 },
               ),
-              // IconButton(onPressed: () {}, icon: const Icon(Icons.person))
-            ],
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(2.h),
-              child: Container(
-                color: Colors.grey,
+              ValueListenableBuilder(
+                valueListenable: Hive.box('settings').listenable(),
+                builder: (context, box, child) {
+                  final isDark = box.get("isDark", defaultValue: false);
+                  return IconButton(
+                    icon: Icon(
+                      isDark ? Icons.brightness_3 : Icons.brightness_6,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
+                    onPressed: () {
+                      box.put("isDark", !isDark);
+                      // Refresh the AppBar after changing the theme
+                      setState(() {});
+                    },
+                  );
+                },
               ),
-            ),
+            ],
           ),
-          body: Scrollbar(
-            child: ListView.builder(
-              itemCount: filteredSongs.length,
-              itemBuilder: (context, index) {
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
                 return Column(
                   children: [
+                    Divider(
+                      color: Colors.grey,
+                      height: 1.h,
+                      thickness: 0.6,
+                      indent: 7.w,
+                      endIndent: 7.w,
+                    ),
                     ListTile(
                       title: Text(
-                        overflow: TextOverflow
-                            .ellipsis, // Display ellipsis (...) at the end
+                        overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         filteredSongs[index].title,
                         style: TextStyle(
@@ -87,20 +147,14 @@ class _SongListPageState extends State<SongListPage> {
                         );
                       },
                     ),
-                    Divider(
-                      color: Colors.grey,
-                      height: 1.h,
-                      thickness: 0.6,
-                      indent: 7.w,
-                      endIndent: 7.w,
-                    ),
                   ],
                 );
               },
+              childCount: filteredSongs.length,
             ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
@@ -147,34 +201,17 @@ class SongSearchDelegate extends SearchDelegate<String> {
     final suggestionList = songs
         .where((song) => song.title.toLowerCase().contains(query.toLowerCase()))
         .toList();
-
     return ListView.builder(
+      itemBuilder: (context, index) => ListTile(
+        title: Text(
+          suggestionList[index].title,
+          style: customTextStyle,
+        ),
+        onTap: () {
+          close(context, suggestionList[index].title);
+        },
+      ),
       itemCount: suggestionList.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            ListTile(
-              title: Text(
-                overflow:
-                    TextOverflow.ellipsis, // Display ellipsis (...) at the end
-                maxLines: 1,
-                suggestionList[index].title,
-                style: customTextStyle,
-              ),
-              onTap: () {
-                close(context, suggestionList[index].title);
-              },
-            ),
-            Divider(
-              color: Colors.grey,
-              height: 1.h,
-              thickness: 0.6,
-              indent: 7.w,
-              endIndent: 7.w,
-            ),
-          ],
-        );
-      },
     );
   }
 }

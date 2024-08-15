@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,8 +11,16 @@ class AboutPage extends StatefulWidget {
 }
 
 class _AboutPageState extends State<AboutPage> {
-  _launchURL() async {
-    final Uri url = Uri.parse("https://github.com/Lameckwh/must_fam_songs");
+  _launchFbURL() async {
+    final Uri url =
+        Uri.parse("https://web.facebook.com/profile.php?id=61556464633949");
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch the url');
+    }
+  }
+
+  _launchYouTubeURL() async {
+    final Uri url = Uri.parse("https://www.youtube.com/@MUSTFAM-db7su");
     if (!await launchUrl(url)) {
       throw Exception('Could not launch the url');
     }
@@ -60,7 +67,7 @@ class _AboutPageState extends State<AboutPage> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700, fontSize: 18.sp),
                     ),
-                    Text("v 1.0.0", style: TextStyle(fontSize: 16.sp)),
+                    Text("v 1.0.1", style: TextStyle(fontSize: 16.sp)),
                   ],
                 ),
                 SizedBox(
@@ -74,9 +81,25 @@ class _AboutPageState extends State<AboutPage> {
                       child: ListBody(
                         children: [
                           ListTile(
-                            leading: const Icon(FontAwesomeIcons.github),
-                            title: const Text("View source code"),
-                            onTap: _launchURL,
+                            leading: const Icon(
+                              FontAwesomeIcons.youtube,
+                              color: Colors.red,
+                            ),
+                            title: const Text("MUST Future Adventist Men"),
+                            onTap: _launchYouTubeURL,
+                          ),
+                          const Divider(
+                            color: Colors.grey,
+                            height: 1,
+                            thickness: 0.6,
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              FontAwesomeIcons.facebook,
+                              color: Colors.blue,
+                            ),
+                            title: const Text("MUST Future Adventist Men"),
+                            onTap: _launchFbURL,
                           ),
                           const Divider(
                             color: Colors.grey,
@@ -113,30 +136,6 @@ class _AboutPageState extends State<AboutPage> {
                                 // Email app is not opened
                               }
                             },
-                          ),
-                          const Divider(
-                            color: Colors.grey,
-                            height: 1,
-                            thickness: 0.6,
-                          ),
-                          ListTile(
-                            onTap: () {},
-                            leading: const Icon(Icons.dark_mode_sharp),
-                            trailing: ValueListenableBuilder(
-                              valueListenable:
-                                  Hive.box('settings').listenable(),
-                              builder: (context, box, child) {
-                                final isDark =
-                                    box.get("isDark", defaultValue: false);
-                                return Switch(
-                                  value: isDark,
-                                  onChanged: (val) {
-                                    box.put("isDark", val);
-                                  },
-                                );
-                              },
-                            ),
-                            title: const Text("Dark Theme"),
                           ),
                         ],
                       ),

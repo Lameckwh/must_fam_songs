@@ -11,15 +11,10 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
-  // Add a GlobalKey for the RefreshIndicator
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
-  // Add a function to handle the refresh
   Future<void> _handleRefresh() async {
-    // You can perform any asynchronous operation here
-    // For example, fetch new data from a server
-    // After completing the operation, call setState to rebuild the UI
     setState(() {
       // Update your data here
     });
@@ -39,87 +34,52 @@ class _EventsPageState extends State<EventsPage> {
         child: RefreshIndicator(
           key: _refreshIndicatorKey,
           onRefresh: _handleRefresh,
-          child: Scrollbar(
-            scrollbarOrientation: ScrollbarOrientation.right,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  // Section for Announcements
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Events',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        // IconButton(
-                        //   tooltip: 'Add New Event',
-                        //   onPressed: () {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) => const EventsForm(),
-                        //       ),
-                        //     );
-                        //   },
-                        //   icon: const Icon(
-                        //     Icons.add_circle_outline_outlined,
-                        //     color: Colors.blue,
-                        //   ),
-                        // ),
-                      ],
+          child: Column(
+            children: [
+              // Section for Events
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Events',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3.h,
-                    child: const Scrollbar(
-                      child: EventList(),
-                    ),
-                  ), // Adjust the height as needed
-                  // Section for Events
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Announcements',
-                          style: TextStyle(
-                            fontSize: 20.0.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        // IconButton(
-                        //   tooltip: 'Add New Announcement',
-                        //   onPressed: () {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) => const AnnouncementForm(),
-                        //       ),
-                        //     );
-                        //   },
-                        //   icon: const Icon(
-                        //     Icons.add_circle_outline_outlined,
-                        //     color: Colors.blue,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.7.h,
-                    child: const AnnouncementList(),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              // Make EventList take its natural height while keeping horizontal alignment
+              SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    0.3.h, // Provide a height that matches your EventList card
+                child: const EventList(),
+              ),
+              // Section for Announcements
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Announcements',
+                      style: TextStyle(
+                        fontSize: 20.0.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Expanded(
+                child: AnnouncementList(),
+              ),
+            ],
           ),
         ),
       ),

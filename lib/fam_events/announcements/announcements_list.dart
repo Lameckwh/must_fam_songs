@@ -43,7 +43,6 @@ class _AnnouncementListState extends State<AnnouncementList> {
         }
 
         return ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
           itemCount: announcements.length,
           itemBuilder: (context, index) {
             final announcement = announcements[index];
@@ -53,59 +52,63 @@ class _AnnouncementListState extends State<AnnouncementList> {
                 (announcement['datePosted'] as Timestamp).toDate();
             final imageUrl = announcement['imageUrl'];
 
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AnnouncementDetail(
-                      title: title,
-                      description: description,
-                      datePosted: datePosted,
-                      imageUrl: imageUrl,
-                    ),
-                  ),
-                );
-              },
+            return MouseRegion(
+              cursor: SystemMouseCursors.click,
               child: Card(
+                elevation: 4,
                 margin: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AnnouncementDetail(
+                          title: title,
+                          description: description,
+                          datePosted: datePosted,
+                          imageUrl: imageUrl,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
                       children: [
-                        SizedBox(height: 8.0.h),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: 280.w,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  title,
-                                  style: TextStyle(
-                                    fontSize: 18.0.h,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title,
+                                style: TextStyle(
+                                  fontSize: 18.0.sp,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Text(
-                                  _truncateDescription(description),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(height: 8.0.h),
+                              Text(
+                                _truncateDescription(description),
+                                style: TextStyle(fontSize: 14.0.sp),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(height: 8.0.h),
+                              Text(
+                                formattedDate(datePosted),
+                                style: TextStyle(
+                                  fontSize: 12.0.sp,
+                                  color: Colors.grey,
                                 ),
-                                SizedBox(height: 8.0.h),
-                                Text(
-                                  formattedDate(datePosted),
-                                  style: const TextStyle(color: Colors.grey),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             );
@@ -120,7 +123,7 @@ class _AnnouncementListState extends State<AnnouncementList> {
   }
 
   String _truncateDescription(String description) {
-    const int maxLength = 70;
+    const int maxLength = 100;
     return description.length > maxLength
         ? '${description.substring(0, maxLength)}...'
         : description;

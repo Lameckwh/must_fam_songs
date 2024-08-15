@@ -35,7 +35,7 @@ class FavoriteLyricsPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
-              child: Text(
+              child: SelectableText(
                 favoriteSong.lyrics,
                 style: const TextStyle(
                   fontSize: 21,

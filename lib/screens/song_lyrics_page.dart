@@ -96,8 +96,9 @@ class _LyricsPageState extends State<LyricsPage> {
           ),
         ),
         actions: [
-          ButtonBar(
-            alignment: MainAxisAlignment.center,
+          OverflowBar(
+            // alignment: MainAxisAlignment.end,
+            overflowAlignment: OverflowBarAlignment.end,
             children: <Widget>[
               IconButton(
                 iconSize: 25,
@@ -144,7 +145,6 @@ class _LyricsPageState extends State<LyricsPage> {
                       style: const TextStyle(
                         fontSize: 21,
                         height: 1.5,
-                         
                       ),
                     ),
                   ),

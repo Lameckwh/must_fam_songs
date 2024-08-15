@@ -33,13 +33,11 @@ class _EventListState extends State<EventList> {
         final events = snapshot.data!.docs;
 
         if (events.isEmpty) {
-          return Column(
-            children: [
-              SizedBox(height: 16.h),
-              const Center(
-                child: Text('No Events Posted Yet'),
-              ),
-            ],
+          return Center(
+            child: Text(
+              'No Events Posted Yet',
+              style: TextStyle(fontSize: 16.sp),
+            ),
           );
         }
 
@@ -50,8 +48,8 @@ class _EventListState extends State<EventList> {
             final event = events[index];
             final title = event['title'];
             final description = event['description'];
-            final dateOfEvent = (event['dateOfEvent'] as Timestamp).toDate();
             final imageUrl = event['imageUrl'];
+            final dateOfEvent = (event['dateOfEvent'] as Timestamp).toDate();
 
             return GestureDetector(
               onTap: () {
@@ -61,70 +59,134 @@ class _EventListState extends State<EventList> {
                     builder: (context) => EventDetails(
                       title: title,
                       description: description,
-                      dateOfEvent:
-                          dateOfEvent, // Use dateOfEvent instead of datePosted
-                      imageUrl: imageUrl,
+                      dateOfEvent: dateOfEvent,
+                      imageUrl: '', // Remove imageUrl since it's not used
                     ),
                   ),
                 );
               },
               child: Card(
-                margin: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 35.0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                margin:
+                    EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 12.0.h),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Stack(
                     children: [
-                      SizedBox(height: 3.0.h),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                      // Dark Blue Gradient Background
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.height *
+                            0.8.h, // Match this height with the EventList section height
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(255, 3, 30, 59),
+                              Color.fromARGB(255, 29, 72, 109)
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                      ),
+                      // Gradient Overlay
+                      Positioned.fill(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.black.withOpacity(0.5),
+                                Colors.transparent
+                              ],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Event Details
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: Container(
+                          padding: EdgeInsets.all(16.0.w),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     title,
                                     style: TextStyle(
-                                      overflow: TextOverflow.ellipsis,
-                                      fontSize: 20.0.sp,
+                                      fontSize: 18.0.sp,
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.white,
                                     ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   SizedBox(height: 8.0.h),
-                                  // const SizedBox(height: 8.0),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.event,
-                                        size: 20,
+                                  Chip(
+                                    label: Text(
+                                      formattedDate(dateOfEvent),
+                                      style: TextStyle(
+                                        fontSize: 14.0.sp,
+                                        color: Colors.white,
                                       ),
-                                      SizedBox(width: 10.0.w),
-                                      Text(
-                                        formattedDate(dateOfEvent),
-                                        overflow: TextOverflow.fade,
-                                        style: const TextStyle(
-                                            color: Colors.grey, fontSize: 18),
-                                      ),
-                                    ],
-                                  ),
-                                  const Divider(
-                                    thickness: 2,
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Text(
-                                    _truncateDescription(description),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
+                                    ),
+                                    backgroundColor: Colors.black87,
                                   ),
                                 ],
                               ),
-                            ),
-                          ],
+                              SizedBox(height: 8.0.h),
+                              // Read More Button at the Bottom Center
+                              Center(
+                                child: OutlinedButton.icon(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EventDetails(
+                                          title: title,
+                                          description: description,
+                                          dateOfEvent: dateOfEvent,
+                                          imageUrl:
+                                              imageUrl, // Remove imageUrl since it's not used
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 16.0.sp,
+                                    color: Colors.white,
+                                  ),
+                                  label: Text(
+                                    'Read More',
+                                    style: TextStyle(
+                                      fontSize: 14.0.sp,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(color: Colors.white),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 12.0.w, vertical: 8.0.h),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -140,12 +202,5 @@ class _EventListState extends State<EventList> {
 
   String formattedDate(DateTime date) {
     return DateFormat('HH:mm, d MMM y').format(date);
-  }
-
-  String _truncateDescription(String description) {
-    const int maxLength = 250;
-    return description.length > maxLength
-        ? '${description.substring(0, maxLength)}...'
-        : description;
   }
 }

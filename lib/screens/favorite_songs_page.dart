@@ -19,9 +19,8 @@ class FavoritesPage extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           actions: [
-            boxFavoriteSongs.isEmpty
-                ? const Text("")
-                : IconButton(
+            (boxFavoriteSongs.length > 1)
+                ? IconButton(
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -54,8 +53,8 @@ class FavoritesPage extends StatelessWidget {
                                   ),
                                   ElevatedButton(
                                     style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty
-                                          .all<Color>(Colors
+                                      backgroundColor:
+                                          WidgetStateProperty.all<Color>(Colors
                                               .red), // Set background color to red
                                     ),
                                     onPressed: () {
@@ -81,6 +80,7 @@ class FavoritesPage extends StatelessWidget {
                       color: Colors.red,
                     ),
                   )
+                : const Text(''),
           ],
         ),
         body: ValueListenableBuilder<Box>(
@@ -180,7 +180,7 @@ class FavoritesPage extends StatelessWidget {
                                               ElevatedButton(
                                                 style: ButtonStyle(
                                                   backgroundColor:
-                                                      MaterialStateProperty
+                                                      WidgetStateProperty
                                                           .all<Color>(Colors
                                                               .red), // Set background color to red
                                                 ),
