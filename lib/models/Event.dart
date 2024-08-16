@@ -6,6 +6,7 @@ class Event {
   final String description;
   final DateTime dateOfEvent;
   final String imageUrl;
+  final DateTime timestamp; // Add this field
 
   Event({
     required this.id,
@@ -13,6 +14,7 @@ class Event {
     required this.description,
     required this.dateOfEvent,
     required this.imageUrl,
+    required this.timestamp, // Add this field
   });
 
   factory Event.fromFirestore(DocumentSnapshot doc) {
@@ -23,6 +25,7 @@ class Event {
       description: data['description'] ?? '',
       dateOfEvent: (data['dateOfEvent'] as Timestamp).toDate(),
       imageUrl: data['imageUrl'] ?? '',
+      timestamp: (data['timestamp'] as Timestamp).toDate(), // Extract timestamp
     );
   }
 }

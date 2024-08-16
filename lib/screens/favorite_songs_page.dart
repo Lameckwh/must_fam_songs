@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:must_fam_songs/screens/favorite_lyrics_page.dart';
-import 'package:must_fam_songs/model/boxes.dart';
-import 'package:must_fam_songs/model/favorite_songs.dart';
+import 'package:must_fam_songs/models/boxes.dart';
+import 'package:must_fam_songs/models/favorite_songs.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});

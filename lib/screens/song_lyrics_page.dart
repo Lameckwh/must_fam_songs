@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:must_fam_songs/screens/favorite_songs_page.dart';
-import 'package:must_fam_songs/model/boxes.dart';
-import 'package:must_fam_songs/model/favorite_songs.dart';
+import 'package:must_fam_songs/models/boxes.dart';
+import 'package:must_fam_songs/models/favorite_songs.dart';
 import 'package:must_fam_songs/song.dart';
 
 class LyricsPage extends StatefulWidget {

@@ -6,6 +6,7 @@ class Announcement {
   final String description;
   final DateTime datePosted;
   final String imageUrl;
+  final DateTime timestamp; // Add this field
 
   Announcement({
     required this.id,
@@ -13,6 +14,7 @@ class Announcement {
     required this.description,
     required this.datePosted,
     required this.imageUrl,
+    required this.timestamp, // Add this field
   });
 
   factory Announcement.fromFirestore(DocumentSnapshot doc) {
@@ -23,6 +25,7 @@ class Announcement {
       description: data['description'] ?? '',
       datePosted: (data['datePosted'] as Timestamp).toDate(),
       imageUrl: data['imageUrl'] ?? '',
+      timestamp: (data['timestamp'] as Timestamp).toDate(), // Extract timestamp
     );
   }
 }

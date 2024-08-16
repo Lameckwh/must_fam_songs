@@ -10,12 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:must_fam_songs/screens/home_page.dart';
-import 'package:must_fam_songs/model/boxes.dart';
-import 'package:must_fam_songs/model/favorite_songs.dart';
+import 'package:must_fam_songs/models/boxes.dart';
+import 'package:must_fam_songs/models/favorite_songs.dart';
 import 'package:must_fam_songs/fam_events/events/event_details.dart';
 import 'package:must_fam_songs/fam_events/announcements/announcement_detail.dart';
-import 'package:must_fam_songs/models/Announcement.dart';
-import 'package:must_fam_songs/models/Event.dart';
+import 'models/Announcement.dart';
+import 'models/Event.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -92,7 +92,8 @@ void main() async {
   Logger.level = Level.info;
 
   final prefs = await SharedPreferences.getInstance();
-  final firstTime = prefs.getBool('firstTime') ?? true;
+  final lastSeenEventTime = prefs.getString('lastSeenEventTime');
+  final lastSeenAnnouncementTime = prefs.getString('lastSeenAnnouncementTime');
 
   await Hive.initFlutter();
   Hive.registerAdapter(FavoriteSongsAdapter());
@@ -135,18 +136,22 @@ void main() async {
   // Listen for Firestore changes and show notifications
   FirebaseFirestore.instance
       .collection('events')
+      .where('timestamp', isGreaterThan: lastSeenEventTime ?? "")
       .snapshots()
       .listen((snapshot) {
     for (var change in snapshot.docChanges) {
       if (change.type == DocumentChangeType.added) {
         final event = Event.fromFirestore(change.doc);
         _showNotificationFromFirestore('Event', event.id, event.title);
+        // Update last seen timestamp
+        prefs.setString('lastSeenEventTime', event.timestamp.toString());
       }
     }
   });
 
   FirebaseFirestore.instance
       .collection('announcements')
+      .where('timestamp', isGreaterThan: lastSeenAnnouncementTime ?? "")
       .snapshots()
       .listen((snapshot) {
     for (var change in snapshot.docChanges) {
@@ -154,10 +159,14 @@ void main() async {
         final announcement = Announcement.fromFirestore(change.doc);
         _showNotificationFromFirestore(
             'Announcement', announcement.id, announcement.title);
+        // Update last seen timestamp
+        prefs.setString(
+            'lastSeenAnnouncementTime', announcement.timestamp.toString());
       }
     }
   });
 
+  final firstTime = prefs.getBool('firstTime') ?? true;
   if (firstTime) {
     runApp(const MyApp(showWelcomePage: true));
     await prefs.setBool('firstTime', false);

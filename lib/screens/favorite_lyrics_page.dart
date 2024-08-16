@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:must_fam_songs/model/favorite_songs.dart';
+import 'package:must_fam_songs/models/favorite_songs.dart';
 
 class FavoriteLyricsPage extends StatelessWidget {
   final FavoriteSongs favoriteSong;

@@ -35,7 +35,7 @@ class _EventListState extends State<EventList> {
         if (events.isEmpty) {
           return Center(
             child: Text(
-              'No Events Posted Yet',
+              'There are no events at this moment',
               style: TextStyle(fontSize: 16.sp),
             ),
           );

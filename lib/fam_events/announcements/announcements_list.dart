@@ -37,7 +37,7 @@ class _AnnouncementListState extends State<AnnouncementList> {
           return Column(
             children: [
               SizedBox(height: 20.h),
-              const Text('No Announcement Posted Yet'),
+              const Text('There are no announcements at this moment'),
             ],
           );
         }
