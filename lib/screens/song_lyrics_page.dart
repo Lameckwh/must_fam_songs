@@ -76,11 +76,12 @@ class _LyricsPageState extends State<LyricsPage> {
           },
         ),
       );
+      
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-
     // Force a rebuild of the widget to update the favorite icon
     setState(() {});
+
   }
 
   @override
